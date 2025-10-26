@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users, MessageSquare, Handshake, Building2, Star, Check } from 'lucide-react';
+import Spline from '@splinetool/react-spline';
 
 const PRIMARY = '#2596be';
 
@@ -44,21 +45,17 @@ const IntegrationsLogo = ({ name }) => (
 const Home = ({ onGoPricing }) => {
   return (
     <main>
-      {/* Hero */}
+      {/* Hero with interactive Spline background */}
       <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "url('https://cdn.dribbble.com/userupload/16537236/file/original-3c9baf8044faac370974ead6e9a41217.jpg?resize=1504x1003&vertical=center')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+        <div className="absolute inset-0">
+          <Spline scene="https://prod.spline.design/N8g2VNcx8Rycz93J/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        </div>
+        {/* Soft gradient so text remains readable; doesn't block Spline interaction */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(255,255,255,0.6) 50%, rgba(255,255,255,1) 85%)'
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(255,255,255,0.75) 45%, rgba(255,255,255,1) 85%)'
         }} />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-24">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <div className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>
@@ -102,6 +99,20 @@ const Home = ({ onGoPricing }) => {
                     <FeatureCard icon={Building2} title="Deal Registration" desc="Capture and track partner-led deals with clear routing and attribution." />
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Trusted by strip (Crossbeam-like social proof) */}
+        <div className="relative">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
+            <div className="rounded-xl border border-gray-200 bg-white/70 backdrop-blur px-4 sm:px-6 py-4">
+              <p className="text-center text-xs sm:text-sm text-gray-600">Trusted by modern partnership teams</p>
+              <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 items-center">
+                {['Snowflake','Notion','Figma','Segment','Braze','Amplitude'].map((n)=> (
+                  <div key={n} className="text-center text-sm font-medium text-gray-700/80">{n}</div>
+                ))}
               </div>
             </div>
           </div>
