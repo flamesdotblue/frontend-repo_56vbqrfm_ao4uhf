@@ -1,20 +1,18 @@
 import React from 'react';
 import { Rocket, Menu } from 'lucide-react';
 
-const Navbar = ({ onNavigate, current }) => {
+const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
   const [open, setOpen] = React.useState(false);
 
   const NavLink = ({ label, page, anchor }) => {
-    const isActive = current === page;
+    const isActive = currentPage === page;
     const handleClick = (e) => {
       e.preventDefault();
       if (page) {
         onNavigate(page);
       }
       if (anchor) {
-        // Smooth scroll when on home
-        const el = document.getElementById(anchor);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        onScrollTo(anchor);
       }
       setOpen(false);
     };

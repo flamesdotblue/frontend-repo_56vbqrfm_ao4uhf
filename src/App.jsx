@@ -35,7 +35,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar currentPage={page} onNavigate={handleNavigate} onScrollTo={handleScrollTo} />
       <div className="flex-1">
-        {page === 'home' && <Home />}
+        {page === 'home' && <Home onGoPricing={() => setPage('pricing')} />}
         {page === 'pricing' && <Pricing />}
       </div>
       <Footer />
