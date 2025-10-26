@@ -115,6 +115,83 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sub-feature explanations (Deep dive) */}
+      <section id="details" className="py-24 bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <span className="inline-flex items-center rounded-full bg-[#e7f6fb] px-3 py-1 text-xs font-medium text-[#0e2a36] ring-1 ring-[#bde7f5]">How it works</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-semibold text-slate-900">Sub-features explained</h2>
+            <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Go deeper into the workflows your partner team uses every day. Clear steps, outcomes, and value.</p>
+          </div>
+
+          <div className="mt-12 space-y-10">
+            {/* Account mapping deep dive */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-slate-900">Account mapping, done right</h3>
+                  <p className="mt-2 text-sm text-slate-600">Connect your CRM and instantly see where your ICP overlaps with partners. Prioritize by intent, size, and territory.</p>
+                  <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                    <li className="flex gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Secure two-way matching with opt-in controls</li>
+                    <li className="flex gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Filters for ICP, intent signals, and lifecycle stage</li>
+                    <li className="flex gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Export ready lists for AE follow-up</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#e7f6fb] to-white border border-slate-200" />
+              </div>
+            </div>
+
+            {/* Co-selling deep dive */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-white to-[#e7f6fb] border border-slate-200" />
+              </div>
+              <div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-slate-900">Co-selling that aligns teams</h3>
+                  <p className="mt-2 text-sm text-slate-600">Request intros, share notes, and track who influenced what—all synced to your CRM.</p>
+                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[
+                      { k: 'Cycle time', v: '-23%' },
+                      { k: 'Win rate', v: '+18%' },
+                      { k: 'New opps', v: '+34%' },
+                    ].map((m) => (
+                      <div key={m.k} className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                        <p className="text-xs text-slate-500">{m.k}</p>
+                        <p className="text-lg font-semibold text-slate-900">{m.v}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Portal deep dive */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-slate-900">A partner portal they’ll actually use</h3>
+                  <p className="mt-2 text-sm text-slate-600">Share enablement, register deals, and deliver updates in a branded hub your partners love.</p>
+                  <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                    {['Resources & playbooks','Deal registration','Announce & updates','Branding & SSO'].map((item) => (
+                      <li key={item} className="flex items-center gap-2">
+                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#e7f6fb] to-white border border-slate-200" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Blog */}
       <section id="blog" className="py-20 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
