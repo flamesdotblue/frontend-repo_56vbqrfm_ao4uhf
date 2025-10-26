@@ -1,108 +1,89 @@
 import React from 'react';
-import { Check } from 'lucide-react';
 
-const PRIMARY = '#2596be';
-
-const plans = [
+const tiers = [
   {
     name: 'Starter',
-    price: '$49',
-    period: 'mo',
-    highlight: false,
+    price: '$0',
+    description: 'For early stage teams getting started with partners.',
     features: [
-      'Partner portal (basic)',
-      'Up to 50 partners',
-      'Deal registration',
+      'Up to 3 partners',
+      'Shared accounts',
+      'Basic partner directory',
       'Email support',
     ],
+    cta: 'Start free',
+    highlighted: false,
   },
   {
     name: 'Growth',
-    price: '$199',
-    period: 'mo',
-    highlight: true,
+    price: '$499',
+    description: 'For growing partner programs that need collaboration.',
     features: [
-      'Advanced onboarding workflows',
       'Unlimited partners',
-      'Partner communication & forums',
-      'Program tiers & certifications',
+      'Account mapping & overlaps',
+      'Co-selling workflows',
+      'Partner portal',
+      'API access',
       'Priority support',
     ],
+    cta: 'Request demo',
+    highlighted: true,
   },
   {
-    name: 'Scale',
-    price: '$499',
-    period: 'mo',
-    highlight: false,
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'For complex ecosystems and advanced security needs.',
     features: [
-      'SSO & RBAC',
-      'MDF & co-marketing tools',
-      'Custom deal routing',
-      'Audit logs & analytics',
-      'Premium support',
+      'SSO & SCIM',
+      'Advanced permissions',
+      'Custom contracts',
+      'Dedicated CSM',
     ],
+    cta: 'Talk to sales',
+    highlighted: false,
   },
 ];
 
-const PricingCard = ({ plan }) => (
-  <div className={`flex flex-col rounded-2xl border ${plan.highlight ? 'shadow-xl' : 'shadow-sm'} bg-white p-6`} style={{ borderColor: plan.highlight ? PRIMARY : '#e5e7eb' }}>
-    <div className="flex items-baseline justify-between">
-      <h3 className="text-xl font-semibold">{plan.name}</h3>
-      {plan.highlight && (
-        <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>Popular</span>
-      )}
-    </div>
-    <div className="mt-4 flex items-end gap-1">
-      <span className="text-4xl font-bold">{plan.price}</span>
-      <span className="text-gray-500">/{plan.period}</span>
-    </div>
-    <ul className="mt-6 space-y-2">
-      {plan.features.map((f) => (
-        <li key={f} className="flex items-start gap-2 text-sm text-gray-700">
-          <Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }} />
-          <span>{f}</span>
-        </li>
-      ))}
-    </ul>
-    <button
-      className="mt-6 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:opacity-90"
-      style={{ backgroundColor: plan.highlight ? PRIMARY : '#111827' }}
-    >
-      Choose {plan.name}
-    </button>
-  </div>
-);
-
-const CustomCard = () => (
-  <div className="flex flex-col rounded-2xl border border-gray-200 bg-gradient-to-br from-white via-[#f4fbfe] to-[#e7f6fb] p-6 shadow-sm">
-    <h3 className="text-xl font-semibold">Custom</h3>
-    <p className="mt-2 text-gray-700">Need enterprise features, security reviews, or custom terms?</p>
-    <ul className="mt-4 space-y-2 text-sm text-gray-700">
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> Dedicated CSM</li>
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> On-prem & sandbox options</li>
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> SLA & security package</li>
-    </ul>
-    <button onClick={()=>alert('Thanks! Our sales team will contact you.')} className="mt-6 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:opacity-90" style={{ backgroundColor: PRIMARY }}>
-      Talk to sales
-    </button>
-  </div>
-);
-
-const Pricing = () => {
+export default function Pricing() {
   return (
-    <section className="py-16 bg-white">
+    <section id="pricing" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold">Simple, transparent pricing</h1>
-          <p className="mt-2 text-gray-600">Pick a plan that fits your partner motion today and scale without limits.</p>
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Pricing that scales with you</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Choose a plan that fits your partner strategy today, with room to grow.</p>
         </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {plans.map((p) => (<PricingCard key={p.name} plan={p} />))}
-          <CustomCard />
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`rounded-2xl border ${tier.highlighted ? 'border-[#2596be] shadow-xl shadow-[#2596be]/20' : 'border-slate-200'} bg-white p-6 flex flex-col`}
+            >
+              <div className="flex-1">
+                <div className="flex items-baseline justify-between">
+                  <h3 className="text-lg font-semibold text-slate-900">{tier.name}</h3>
+                  <span className="text-2xl font-bold text-slate-900">{tier.price}<span className="text-sm font-normal text-slate-500 ml-1">{tier.price === '$0' ? '' : '/mo'}</span></span>
+                </div>
+                <p className="mt-2 text-sm text-slate-600">{tier.description}</p>
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button
+                className={`mt-6 w-full rounded-md px-4 py-2 text-sm font-semibold ${tier.highlighted ? 'bg-[#2596be] text-white' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'}`}
+                style={tier.highlighted ? { boxShadow: '0 10px 24px rgba(37,150,190,0.25)' } : undefined}
+              >
+                {tier.cta}
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Pricing;
+}

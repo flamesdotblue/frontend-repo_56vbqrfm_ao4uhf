@@ -1,83 +1,47 @@
 import React from 'react';
-import { Rocket, Menu } from 'lucide-react';
 
-const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
-  const [open, setOpen] = React.useState(false);
+const brand = {
+  primary: '#2596be',
+};
 
-  const NavLink = ({ label, page, anchor }) => {
-    const isActive = currentPage === page;
-    const handleClick = (e) => {
-      e.preventDefault();
-      if (page) {
-        onNavigate(page);
-      }
-      if (anchor) {
-        onScrollTo(anchor);
-      }
-      setOpen(false);
-    };
-    return (
-      <a
-        href="#"
-        onClick={handleClick}
-        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-          isActive ? 'text-white bg-[#2596be]' : 'text-gray-700 hover:text-[#2596be]'
-        }`}
-      >
-        {label}
-      </a>
-    );
+export default function Navbar() {
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-gray-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Rocket className="h-6 w-6 text-[#2596be]" />
-            <span className="font-semibold text-lg">AlliedPRM</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-2">
-            <NavLink label="Home" page="home" />
-            <NavLink label="Blog" page="home" anchor="blog" />
-            <NavLink label="Integrations" page="home" anchor="integrations" />
-            <NavLink label="Pricing" page="pricing" />
-            <a
-              href="#"
-              onClick={(e)=>{e.preventDefault(); alert('Our sales team will reach out shortly!');}}
-              className="ml-2 inline-flex items-center justify-center rounded-md bg-[#2596be] px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90"
-            >
-              Talk to sales
-            </a>
-          </nav>
-          <button
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100"
-            onClick={() => setOpen(v => !v)}
-            aria-label="Toggle menu"
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/75 backdrop-blur border-b border-slate-200">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#home" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, 'home')}>
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-md" style={{ backgroundColor: brand.primary }}>
+            <span className="text-white font-bold">P</span>
+          </span>
+          <span className="font-semibold text-slate-900">PRM</span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8 text-sm text-slate-700">
+          <a href="#features" onClick={(e) => handleNavClick(e, 'features')} className="hover:text-slate-900">Features</a>
+          <a href="#integrations" onClick={(e) => handleNavClick(e, 'integrations')} className="hover:text-slate-900">Integrations</a>
+          <a href="#blog" onClick={(e) => handleNavClick(e, 'blog')} className="hover:text-slate-900">Blog</a>
+          <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')} className="hover:text-slate-900">Pricing</a>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <a href="#contact" onClick={(e) => handleNavClick(e, 'footer')} className="hidden sm:inline-flex px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900">Talk to sales</a>
+          <a
+            href="#pricing"
+            onClick={(e) => handleNavClick(e, 'pricing')}
+            className="inline-flex items-center rounded-md bg-[#2596be] px-4 py-2 text-sm font-semibold text-white shadow hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            style={{ boxShadow: '0 8px 20px rgba(37,150,190,0.25)' }}
           >
-            <Menu className="h-6 w-6" />
-          </button>
+            Get started
+          </a>
         </div>
-      </div>
-      {open && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-4 py-3 flex flex-col gap-2">
-            <NavLink label="Home" page="home" />
-            <NavLink label="Blog" page="home" anchor="blog" />
-            <NavLink label="Integrations" page="home" anchor="integrations" />
-            <NavLink label="Pricing" page="pricing" />
-            <a
-              href="#"
-              onClick={(e)=>{e.preventDefault(); alert('Our sales team will reach out shortly!');}}
-              className="inline-flex items-center justify-center rounded-md bg-[#2596be] px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90"
-            >
-              Talk to sales
-            </a>
-          </div>
-        </div>
-      )}
+      </nav>
     </header>
   );
-};
-
-export default Navbar;
+}

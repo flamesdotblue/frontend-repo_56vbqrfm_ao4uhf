@@ -1,117 +1,87 @@
-import React from 'react';
-import { Users, MessageSquare, Handshake, Building2, Star, Check } from 'lucide-react';
+import React, { useRef } from 'react';
 import Spline from '@splinetool/react-spline';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-const PRIMARY = '#2596be';
-
-const FeatureCard = ({ icon: Icon, title, desc }) => (
-  <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>
-      <Icon className="h-5 w-5" />
-    </div>
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
-    <p className="text-sm text-gray-600">{desc}</p>
+const BrandLogo = ({ label }) => (
+  <div className="flex items-center justify-center h-10 rounded-md bg-white/60 backdrop-blur border border-slate-200 px-4">
+    <svg width="100" height="20" viewBox="0 0 100 20" aria-label={label} role="img">
+      <title>{label}</title>
+      <text x="0" y="15" fontFamily="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" fontSize="14" fill="#0f172a">{label}</text>
+    </svg>
   </div>
 );
 
-const TestimonialCard = ({ role, name, img, text }) => (
-  <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-    <div className="flex items-center gap-4 mb-4">
-      <img src={img} alt={name} className="h-12 w-12 rounded-full object-cover" />
-      <div>
-        <p className="font-semibold leading-tight">{role}</p>
-        <p className="text-sm text-gray-600">{name}</p>
-      </div>
-    </div>
-    <p className="text-sm text-gray-700">{text}</p>
-  </div>
-);
+export default function Home() {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
 
-const BlogCard = ({ tag, title, excerpt }) => (
-  <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>{tag}</span>
-    <h3 className="mt-3 text-lg font-semibold">{title}</h3>
-    <p className="mt-2 text-sm text-gray-600">{excerpt}</p>
-    <button className="mt-4 text-sm font-medium hover:underline" style={{ color: PRIMARY }}>Read more</button>
-  </article>
-);
-
-const IntegrationsLogo = ({ name }) => (
-  <div className="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm">
-    {name}
-  </div>
-);
-
-const Home = ({ onGoPricing }) => {
   return (
-    <main>
-      {/* Hero with interactive Spline background */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center">
+    <main id="home" className="pt-16">
+      {/* Hero with Spline */}
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Spline scene="https://prod.spline.design/N8g2VNcx8Rycz93J/scene.splinecode" style={{ width: '100%', height: '100%' }} />
         </div>
-        {/* Soft gradient so text remains readable; doesn't block Spline interaction */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.65) 40%, rgba(255,255,255,1) 85%)'
-        }} />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white"></div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>
-                <Star className="h-4 w-4" /> Partner Relationship Management
-              </div>
-              <h1 className="mt-4 text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-gray-900 leading-[1.1]">
-                Scale revenue with a professional PRM your partners love
-              </h1>
-              <p className="mt-4 text-gray-700 text-lg">
-                Onboard, enable, and co-sell with partners in one place. Deal registration, secure portals, enablement paths, and clean attribution—in minutes, not months.
-              </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <button
-                  onClick={() => onGoPricing()}
-                  className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:opacity-90"
-                  style={{ backgroundColor: PRIMARY }}
-                >
-                  View Pricing
-                </button>
-                <button
-                  onClick={() => alert('Our sales team will reach out shortly!')}
-                  className="inline-flex items-center justify-center rounded-md border bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-50"
-                  style={{ borderColor: '#cbd5e1' }}
-                >
-                  Talk to sales
-                </button>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-700">
-                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> SOC2-ready</div>
-                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> SSO & RBAC</div>
-                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> API-first</div>
-              </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <motion.div style={{ y, opacity }} className="space-y-5">
+            <span className="inline-flex items-center rounded-full bg-[#e7f6fb] px-3 py-1 text-xs font-medium text-[#0e2a36] ring-1 ring-[#bde7f5]">New: Ecosystem overlaps</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900">
+              Grow faster with your partners
+            </h1>
+            <p className="text-lg text-slate-700 max-w-xl">
+              PRM that connects data, partners, and revenue. Map overlaps, co-sell efficiently, and turn your ecosystem into a growth engine.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href="#pricing" className="inline-flex items-center rounded-md bg-[#2596be] px-5 py-3 text-sm font-semibold text-white hover:brightness-105" style={{ boxShadow: '0 12px 28px rgba(37,150,190,0.28)' }}>Get started</a>
+              <a href="#features" className="inline-flex items-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50">See features</a>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/3] w-full rounded-3xl border border-gray-200 bg-white/80 backdrop-blur shadow-inner flex items-center justify-center">
-                <div className="p-6 w-full">
-                  <div className="grid grid-cols-2 gap-3">
-                    <FeatureCard icon={Users} title="Partner Portal" desc="Give partners a unified place to collaborate, access assets, and manage opportunities." />
-                    <FeatureCard icon={Handshake} title="Onboarding" desc="Invite, verify, and activate partners with guided workflows and approvals." />
-                    <FeatureCard icon={MessageSquare} title="Communication" desc="Broadcast updates, run campaigns, and chat in context with partner teams." />
-                    <FeatureCard icon={Building2} title="Deal Registration" desc="Capture and track partner-led deals with clear routing and attribution." />
+            <div className="flex items-center gap-3 pt-2">
+              <div className="flex -space-x-2">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <span key={i} className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 ring-2 ring-white text-[10px] font-semibold text-emerald-700">{i + 1}</span>
+                ))}
+              </div>
+              <span className="text-sm text-slate-600">Trusted by modern partner teams</span>
+            </div>
+          </motion.div>
+
+          <div className="lg:justify-self-end w-full max-w-md">
+            <div className="rounded-2xl bg-white/80 backdrop-blur-xl ring-1 ring-slate-200 p-4 shadow-xl">
+              <div className="rounded-xl bg-[#e7f6fb] p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-slate-700">Overlap score</p>
+                    <p className="text-3xl font-semibold text-slate-900">87%</p>
                   </div>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-white text-[#2596be] font-bold">↗</span>
                 </div>
+                <div className="mt-4 h-2 w-full rounded bg-white">
+                  <div className="h-2 rounded bg-[#2596be]" style={{ width: '87%' }}></div>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                {['Accounts','Opps','Influence'].map((k, i) => (
+                  <div key={k} className="rounded-lg border border-slate-200 p-3 bg-white">
+                    <p className="text-xs text-slate-500">{k}</p>
+                    <p className="mt-1 text-lg font-semibold text-slate-900">{[120, 45, '$620k'][i]}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Trusted by strip (Crossbeam-like social proof) */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
-            <div className="rounded-2xl border border-gray-200 bg-white/80 backdrop-blur px-4 sm:px-6 py-4 shadow-sm">
-              <p className="text-center text-xs sm:text-sm text-gray-600">Trusted by modern partnership teams</p>
-              <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 items-center">
-                {['Snowflake','Notion','Figma','Segment','Braze','Amplitude'].map((n)=> (
-                  <div key={n} className="text-center text-sm font-medium text-gray-700/80">{n}</div>
+        {/* Trusted by */}
+        <div className="absolute bottom-6 inset-x-0">
+          <div className="mx-auto max-w-5xl px-4">
+            <div className="rounded-xl bg-white/70 backdrop-blur border border-slate-200 p-3 shadow-md">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                {['Snowflake','Notion','Figma','Segment','Braze','Amplitude'].map((label) => (
+                  <BrandLogo key={label} label={label} />
                 ))}
               </div>
             </div>
@@ -119,72 +89,75 @@ const Home = ({ onGoPricing }) => {
         </div>
       </section>
 
-      {/* Features Grid (detailed) */}
-      <section className="py-20 bg-white">
+      {/* Features */}
+      <section id="features" className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold">Everything you need to scale partnerships</h2>
-          <p className="mt-2 text-gray-600">Purpose-built modules that work beautifully together.</p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureCard icon={Handshake} title="Partner Onboarding" desc="Streamlined invites, e-sign, compliance checks, and tiering to activate partners faster." />
-            <FeatureCard icon={Users} title="Partner Portal" desc="Centralize content, enablement paths, certifications, and marketplace listings." />
-            <FeatureCard icon={MessageSquare} title="Partner Communication" desc="Forums, announcements, and messaging to keep every partner in the loop." />
-            <FeatureCard icon={Building2} title="Deal Registration" desc="Standardize deal intake, avoid conflicts, and keep revenue attribution clean." />
-            <FeatureCard icon={Users} title="Partner Program" desc="Define program tiers, benefits, MDF, and co-marketing with measurable outcomes." />
-            <FeatureCard icon={Star} title="Partner Marketing" desc="Launch co-branded campaigns, shareable assets, and track sourced pipeline." />
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Everything you need to co-sell</h2>
+            <p className="mt-3 text-slate-600 max-w-2xl mx-auto">From account mapping to partner-sourced pipeline, streamline collaboration with a platform built for GTM teams.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ICP / Who should use */}
-      <section className="py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold">Who should use AlliedPRM?</h2>
-          <p className="mt-2 text-gray-600">Focused outcomes for every stakeholder in your ecosystem.</p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <TestimonialCard role="Partnerships Team" name="Aisha Gupta, Head of Alliances" img="https://i.pravatar.cc/120?img=1" text="We cut partner activation time by 60% and gained full visibility into sourced pipeline." />
-            <TestimonialCard role="Sales Team" name="Diego Ramirez, VP Sales" img="https://i.pravatar.cc/120?img=2" text="Conflict-free registrations and clean attribution made our channel a first-class motion." />
-            <TestimonialCard role="Growth Team" name="Mei Chen, Growth Lead" img="https://i.pravatar.cc/120?img=3" text="Co-marketing kits and partner marketplace helped us 3x referrals in one quarter." />
-            <TestimonialCard role="CXOs" name="James Okafor, COO" img="https://i.pravatar.cc/120?img=4" text="Reliable forecasting from partner data improved planning and executive alignment." />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { title: 'Account mapping', desc: 'Securely map overlaps, filter by ICP, and prioritize high-fit accounts.' },
+              { title: 'Co-selling workflows', desc: 'Request intros, share intel, and track influence in one place.' },
+              { title: 'Partner portal', desc: 'Enable partners with resources, updates, and deal registration.' },
+              { title: 'Attribution', desc: 'Attribute sourced & influenced revenue with transparent reporting.' },
+              { title: 'Integrations', desc: 'Connect your CRM, data warehouse, and marketing tools.' },
+              { title: 'Security', desc: 'Enterprise-grade encryption, SSO, and granular permissions.' },
+            ].map((f) => (
+              <div key={f.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-10 w-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">✓</div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900">{f.title}</h3>
+                <p className="mt-1 text-sm text-slate-600">{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Blog */}
-      <section id="blog" className="py-20 bg-white">
+      <section id="blog" className="py-20 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex items-end justify-between">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold">Insights & Blog</h2>
-              <p className="mt-2 text-gray-600">PRM, Partner Onboarding, Enablement, and Marketing best practices.</p>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">Insights from the ecosystem</h2>
+              <p className="mt-2 text-slate-600">Best practices and stories from modern partner teams.</p>
             </div>
-            <button className="text-sm font-medium hover:underline" style={{ color: PRIMARY }}>View all</button>
+            <a href="#" className="hidden sm:inline text-sm font-medium text-[#2596be]">View all</a>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <BlogCard tag="PRM" title="What is Partner Relationship Management?" excerpt="A practical guide to building a scalable partner motion." />
-            <BlogCard tag="Onboarding" title="Design an Onboarding Playbook" excerpt="From invite to activation: steps that reduce time-to-value." />
-            <BlogCard tag="Enablement" title="Certifications that Drive Revenue" excerpt="How to build enablement paths partners will love." />
-            <BlogCard tag="Marketing" title="Co-Marketing that Converts" excerpt="Turn partners into a growth channel with the right assets." />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { tag: 'Guide', title: 'How to run effective account mapping', read: '7 min read' },
+              { tag: 'Playbook', title: 'Co-selling with top partners', read: '6 min read' },
+              { tag: 'Case study', title: 'Driving $2.4M in influenced pipeline', read: '5 min read' },
+            ].map((p) => (
+              <article key={p.title} className="group rounded-2xl overflow-hidden border border-slate-200 bg-white">
+                <div className="h-40 bg-gradient-to-br from-[#e7f6fb] to-white" />
+                <div className="p-5">
+                  <span className="inline-flex items-center rounded-full bg-[#e7f6fb] px-2.5 py-1 text-xs font-medium text-[#0e2a36] ring-1 ring-[#bde7f5]">{p.tag}</span>
+                  <h3 className="mt-3 text-lg font-semibold text-slate-900 group-hover:text-[#2596be]">{p.title}</h3>
+                  <p className="mt-1 text-xs text-slate-500">{p.read}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Integrations */}
-      <section id="integrations" className="py-20 bg-gray-50">
+      <section id="integrations" className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold">Integrations</h2>
-          <p className="mt-2 text-gray-600">Connect your CRM, support, and marketing stack in minutes.</p>
-          <div className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-            <IntegrationsLogo name="Salesforce" />
-            <IntegrationsLogo name="HubSpot" />
-            <IntegrationsLogo name="Zendesk" />
-            <IntegrationsLogo name="Slack" />
-            <IntegrationsLogo name="Google" />
-            <IntegrationsLogo name="Microsoft" />
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900">Works with your stack</h2>
+            <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Connect Salesforce, HubSpot, Snowflake, Slack, and more. Sync data where you need it.</p>
+          </div>
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {['Salesforce','HubSpot','Snowflake','Slack','Marketo','Looker'].map((label) => (
+              <BrandLogo key={label} label={label} />
+            ))}
           </div>
         </div>
       </section>
     </main>
   );
-};
-
-export default Home;
+}
