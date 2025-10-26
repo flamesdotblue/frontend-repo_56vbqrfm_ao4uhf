@@ -17,6 +17,12 @@ export default function Home() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
 
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <main id="home" className="pt-16">
       {/* Hero with Spline */}
@@ -36,8 +42,9 @@ export default function Home() {
               PRM that connects data, partners, and revenue. Map overlaps, co-sell efficiently, and turn your ecosystem into a growth engine.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <a href="#pricing" className="inline-flex items-center rounded-md bg-[#2596be] px-5 py-3 text-sm font-semibold text-white hover:brightness-105" style={{ boxShadow: '0 12px 28px rgba(37,150,190,0.28)' }}>Get started</a>
-              <a href="#features" className="inline-flex items-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50">See features</a>
+              <a href="#demo" onClick={(e) => handleScroll(e, 'demo')} className="inline-flex items-center rounded-md bg-[#2596be] px-5 py-3 text-sm font-semibold text-white hover:brightness-105" style={{ boxShadow: '0 12px 28px rgba(37,150,190,0.28)' }}>Book demo</a>
+              <a href="#pricing" onClick={(e) => handleScroll(e, 'pricing')} className="inline-flex items-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50">Get started</a>
+              <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="inline-flex items-center rounded-md text-sm font-semibold text-slate-700 hover:text-slate-900">See features</a>
             </div>
             <div className="flex items-center gap-3 pt-2">
               <div className="flex -space-x-2">
@@ -188,6 +195,12 @@ export default function Home() {
                 <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#e7f6fb] to-white border border-slate-200" />
               </div>
             </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <a href="#demo" onClick={(e) => handleScroll(e, 'demo')} className="inline-flex items-center rounded-md bg-[#2596be] px-6 py-3 text-sm font-semibold text-white hover:brightness-105" style={{ boxShadow: '0 12px 28px rgba(37,150,190,0.28)' }}>
+              Book a live demo
+            </a>
           </div>
         </div>
       </section>

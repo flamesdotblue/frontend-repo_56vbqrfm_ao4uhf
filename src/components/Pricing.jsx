@@ -13,6 +13,7 @@ const tiers = [
     ],
     cta: 'Start free',
     highlighted: false,
+    link: '#pricing',
   },
   {
     name: 'Growth',
@@ -26,8 +27,9 @@ const tiers = [
       'API access',
       'Priority support',
     ],
-    cta: 'Request demo',
+    cta: 'Book demo',
     highlighted: true,
+    link: '#demo',
   },
   {
     name: 'Enterprise',
@@ -41,10 +43,17 @@ const tiers = [
     ],
     cta: 'Talk to sales',
     highlighted: false,
+    link: '#demo',
   },
 ];
 
 export default function Pricing() {
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <section id="pricing" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,12 +83,14 @@ export default function Pricing() {
                   ))}
                 </ul>
               </div>
-              <button
-                className={`mt-6 w-full rounded-md px-4 py-2 text-sm font-semibold ${tier.highlighted ? 'bg-[#2596be] text-white' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'}`}
+              <a
+                href={tier.link}
+                onClick={(e) => handleScroll(e, tier.link.replace('#',''))}
+                className={`mt-6 w-full rounded-md px-4 py-2 text-sm font-semibold text-center ${tier.highlighted ? 'bg-[#2596be] text-white hover:brightness-105' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'}`}
                 style={tier.highlighted ? { boxShadow: '0 10px 24px rgba(37,150,190,0.25)' } : undefined}
               >
                 {tier.cta}
-              </button>
+              </a>
             </div>
           ))}
         </div>
