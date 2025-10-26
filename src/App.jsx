@@ -1,28 +1,44 @@
-import { useState } from 'react'
+import React from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Pricing from './components/Pricing';
+import Footer from './components/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [page, setPage] = React.useState('home');
+  const scrollTargetRef = React.useRef(null);
+
+  const handleNavigate = (next) => {
+    setPage(next);
+    scrollTargetRef.current = null;
+  };
+
+  const handleScrollTo = (id) => {
+    if (page !== 'home') {
+      scrollTargetRef.current = id;
+      setPage('home');
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  React.useEffect(() => {
+    if (page === 'home' && scrollTargetRef.current) {
+      const el = document.getElementById(scrollTargetRef.current);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollTargetRef.current = null;
+    }
+  }, [page]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navbar currentPage={page} onNavigate={handleNavigate} onScrollTo={handleScrollTo} />
+      <div className="flex-1">
+        {page === 'home' && <Home />}
+        {page === 'pricing' && <Pricing />}
       </div>
+      <Footer />
     </div>
-  )
+  );
 }
-
-export default App
