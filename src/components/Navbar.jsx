@@ -21,7 +21,7 @@ const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
         href="#"
         onClick={handleClick}
         className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-          isActive ? 'text-white bg-indigo-600' : 'text-gray-700 hover:text-indigo-600'
+          isActive ? 'text-white bg-[#2596be]' : 'text-gray-700 hover:text-[#2596be]'
         }`}
       >
         {label}
@@ -34,7 +34,7 @@ const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-            <Rocket className="h-6 w-6 text-indigo-600" />
+            <Rocket className="h-6 w-6 text-[#2596be]" />
             <span className="font-semibold text-lg">AlliedPRM</span>
           </div>
           <nav className="hidden md:flex items-center gap-2">
@@ -45,7 +45,7 @@ const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
             <a
               href="#"
               onClick={(e)=>{e.preventDefault(); alert('Our sales team will reach out shortly!');}}
-              className="ml-2 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+              className="ml-2 inline-flex items-center justify-center rounded-md bg-[#2596be] px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90"
             >
               Talk to sales
             </a>
@@ -69,7 +69,7 @@ const Navbar = ({ onNavigate, onScrollTo, currentPage }) => {
             <a
               href="#"
               onClick={(e)=>{e.preventDefault(); alert('Our sales team will reach out shortly!');}}
-              className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+              className="inline-flex items-center justify-center rounded-md bg-[#2596be] px-4 py-2 text-sm font-medium text-white shadow-sm hover:opacity-90"
             >
               Talk to sales
             </a>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
+const PRIMARY = '#2596be';
+
 const plans = [
   {
     name: 'Starter',
@@ -43,11 +45,11 @@ const plans = [
 ];
 
 const PricingCard = ({ plan }) => (
-  <div className={`flex flex-col rounded-2xl border ${plan.highlight ? 'border-indigo-600 shadow-xl' : 'border-gray-200 shadow-sm'} bg-white p-6` }>
+  <div className={`flex flex-col rounded-2xl border ${plan.highlight ? 'shadow-xl' : 'shadow-sm'} bg-white p-6`} style={{ borderColor: plan.highlight ? PRIMARY : '#e5e7eb' }}>
     <div className="flex items-baseline justify-between">
       <h3 className="text-xl font-semibold">{plan.name}</h3>
       {plan.highlight && (
-        <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">Popular</span>
+        <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>Popular</span>
       )}
     </div>
     <div className="mt-4 flex items-end gap-1">
@@ -57,27 +59,30 @@ const PricingCard = ({ plan }) => (
     <ul className="mt-6 space-y-2">
       {plan.features.map((f) => (
         <li key={f} className="flex items-start gap-2 text-sm text-gray-700">
-          <Check className="mt-0.5 h-4 w-4 text-emerald-600" />
+          <Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }} />
           <span>{f}</span>
         </li>
       ))}
     </ul>
-    <button className={`mt-6 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium ${plan.highlight ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-900 text-white hover:bg-gray-800'}`}>
+    <button
+      className="mt-6 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+      style={{ backgroundColor: plan.highlight ? PRIMARY : '#111827' }}
+    >
       Choose {plan.name}
     </button>
   </div>
 );
 
 const CustomCard = () => (
-  <div className="flex flex-col rounded-2xl border border-gray-200 bg-gradient-to-br from-indigo-50 via-white to-indigo-50 p-6 shadow-sm">
+  <div className="flex flex-col rounded-2xl border border-gray-200 bg-gradient-to-br from-white via-[#f4fbfe] to-[#e7f6fb] p-6 shadow-sm">
     <h3 className="text-xl font-semibold">Custom</h3>
     <p className="mt-2 text-gray-700">Need enterprise features, security reviews, or custom terms?</p>
     <ul className="mt-4 space-y-2 text-sm text-gray-700">
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-emerald-600"/> Dedicated CSM</li>
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-emerald-600"/> On-prem & sandbox options</li>
-      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-emerald-600"/> SLA & security package</li>
+      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> Dedicated CSM</li>
+      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> On-prem & sandbox options</li>
+      <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" style={{ color: '#10b981' }}/> SLA & security package</li>
     </ul>
-    <button onClick={()=>alert('Thanks! Our sales team will contact you.')} className="mt-6 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+    <button onClick={()=>alert('Thanks! Our sales team will contact you.')} className="mt-6 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-white hover:opacity-90" style={{ backgroundColor: PRIMARY }}>
       Talk to sales
     </button>
   </div>

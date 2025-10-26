@@ -1,9 +1,11 @@
 import React from 'react';
 import { Users, MessageSquare, Handshake, Building2, Star, Check } from 'lucide-react';
 
+const PRIMARY = '#2596be';
+
 const FeatureCard = ({ icon: Icon, title, desc }) => (
   <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>
       <Icon className="h-5 w-5" />
     </div>
     <h3 className="text-lg font-semibold mb-2">{title}</h3>
@@ -26,10 +28,10 @@ const TestimonialCard = ({ role, name, img, text }) => (
 
 const BlogCard = ({ tag, title, excerpt }) => (
   <article className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-    <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">{tag}</span>
+    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>{tag}</span>
     <h3 className="mt-3 text-lg font-semibold">{title}</h3>
     <p className="mt-2 text-sm text-gray-600">{excerpt}</p>
-    <button className="mt-4 text-indigo-600 text-sm font-medium hover:underline">Read more</button>
+    <button className="mt-4 text-sm font-medium hover:underline" style={{ color: PRIMARY }}>Read more</button>
   </article>
 );
 
@@ -44,35 +46,54 @@ const Home = ({ onGoPricing }) => {
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-indigo-50 to-transparent" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "url('https://cdn.dribbble.com/userupload/16537236/file/original-3c9baf8044faac370974ead6e9a41217.jpg?resize=1504x1003&vertical=center')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(255,255,255,0.6) 50%, rgba(255,255,255,1) 85%)'
+        }} />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-emerald-700 text-xs font-medium">
+              <div className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium" style={{ backgroundColor: '#e7f6fb', color: PRIMARY }}>
                 <Star className="h-4 w-4" /> Partner Relationship Management
               </div>
-              <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
+              <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900">
                 Unify your partner ecosystem with a modern PRM
               </h1>
-              <p className="mt-4 text-gray-600 text-lg">
+              <p className="mt-4 text-gray-700 text-lg">
                 Onboard, enable, and grow with partners on one platform. Drive revenue with deal registration, a secure partner portal, and collaborative communications.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <button onClick={() => onGoPricing()} className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
+                <button
+                  onClick={() => onGoPricing()}
+                  className="inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:opacity-90"
+                  style={{ backgroundColor: PRIMARY }}
+                >
                   View Pricing
                 </button>
-                <button onClick={() => alert('Our sales team will reach out shortly!')} className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-50">
+                <button
+                  onClick={() => alert('Our sales team will reach out shortly!')}
+                  className="inline-flex items-center justify-center rounded-md border bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-50"
+                  style={{ borderColor: '#cbd5e1' }}
+                >
                   Talk to sales
                 </button>
               </div>
-              <div className="mt-6 flex items-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600"/> SOC2-ready</div>
-                <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600"/> SSO & RBAC</div>
-                <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600"/> API-first</div>
+              <div className="mt-6 flex items-center gap-4 text-sm text-gray-700">
+                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> SOC2-ready</div>
+                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> SSO & RBAC</div>
+                <div className="flex items-center gap-2"><Check className="h-4 w-4" style={{ color: '#10b981' }}/> API-first</div>
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/3] w-full rounded-2xl border border-gray-200 bg-gradient-to-br from-indigo-100 via-white to-indigo-50 shadow-inner flex items-center justify-center">
+              <div className="aspect-[4/3] w-full rounded-2xl border border-gray-200 bg-white/80 backdrop-blur shadow-inner flex items-center justify-center">
                 <div className="p-6">
                   <div className="grid grid-cols-2 gap-3">
                     <FeatureCard icon={Users} title="Partner Portal" desc="Give new and existing partners a unified place to collaborate, access assets, and manage opportunities." />
@@ -125,7 +146,7 @@ const Home = ({ onGoPricing }) => {
               <h2 className="text-2xl sm:text-3xl font-bold">Insights & Blog</h2>
               <p className="mt-2 text-gray-600">PRM, Partner Onboarding, Enablement, and Marketing best practices.</p>
             </div>
-            <button className="text-indigo-600 text-sm font-medium hover:underline">View all</button>
+            <button className="text-sm font-medium hover:underline" style={{ color: PRIMARY }}>View all</button>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <BlogCard tag="PRM" title="What is Partner Relationship Management?" excerpt="A practical guide to building a scalable partner motion." />
